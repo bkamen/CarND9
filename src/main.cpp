@@ -35,7 +35,7 @@ int main()
   PID pid_lat, pid_long;
   // TODO: Initialize the pid variable.
 
-  pid_lat.Init(.12, 3.0e-3, 5, true);
+  pid_lat.Init(.12, 1.0e-3, 5, true);
   pid_long.Init(.1, 0, 0.1, false);
 
   h.onMessage([&pid_lat, &pid_long](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {

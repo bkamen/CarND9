@@ -76,14 +76,14 @@ void PID::UpdateError(double cte) {
                 this->add_step = this->sub_step = false;
                 cout<<"current delta vector: "<<dp[0]<<" "<<dp[1]<<" "<<dp[2]<<endl;
             }
-            //
+            // if the add and substract step haven't been done, do the add step
             if (!add_step && !sub_step) {
                 AdjustParam(p_idx, dp[p_idx]);
                 this->add_step = true;
-            } else if (add_step && !sub_step) {
+            } else if (add_step && !sub_step) { // if the add step has been done, do the substract step
                 AdjustParam(p_idx, -2*dp[p_idx]);
                 this->sub_step = true;
-            } else {
+            } else { // if both steps didn't reduce the error reduce the parameter step size
                 AdjustParam(p_idx, dp[p_idx]);
                 this->dp[p_idx] *= 0.9;
                 this->p_idx = (p_idx+1) % 3;
