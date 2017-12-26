@@ -1,6 +1,25 @@
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
 
+## Description of the PID controller
+
+### P
+P controls the proportional part of the controller which ajusts the steering value proportional to the cross-track error. If P is isolated (meaning the I and D-value are set to 0) the car tends to overshoot the target value. It oscilates around zero on straights. If the isolated P is set to high the oscillation will amplify over time. If set too low the car won't make tight turns.
+
+
+### D
+D is proportional to the derivative of the cross-track error and controls the controllers tendency to overshoot. If set too low the controller still tends to overshoot, if set too high the controllers reaction time becomes large.
+
+### I 
+I is proportional to the integral of all errors and accounts for biases (e.g. in the steering system of a car) the PD controller wouldn't account for.
+
+### Choice of hyperparameters
+First a starting parameterset was chosen "by hand" with which the car can safely finishes the circuit.
+
+For the throttle a very simple PD controller was implemented. It targets a throttle pedal value of 0.6 but reduces it proportional to the cross-track error. This element wasn't given much thought yet. The purpose is to simulate throttle reduction for higher lateral accelerations.
+
+Twiddle was implemented to find the optimal parameters. The controller evaluates a defined amount of steps (variable step). Before the total error gets calculated the car has to pass a settle time (variable n_settle) otherwise the very first evaluation ends up having the lowest error due to low speed and cross-track error at the beginning of the simulations. 
+
 ---
 
 ## Dependencies
